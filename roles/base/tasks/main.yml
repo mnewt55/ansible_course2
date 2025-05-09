@@ -18,3 +18,12 @@
   ansible.builtin.authorized_key:
     user: simone
     key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6A5aMq0rbkecorN8FvzdYA018LR4oWSGFKVqzpGjHs0Hr580sAV7a4yqkFIv4PgMredoiVjG/MH2S3MVW73wg9XkyBvLg2ffCmRYSRHwgXwuIFKrG/WCqidWGL9GZJjGC+j+6yoeRIRmv0PwnnLIqeBvAw2pJ/KR4haaKYHFaiplVuL6kIhV6LoS1cJAoJwyh9x+iMhGiMz14JYWy4CdZaTftYsoH7xTD+XGN0pX0xdeZA8QiAdOrwBa2pfw1JdUwrV2PqOfDwuesK8Ve9KW0bfRhhtj7uwR8FlYAVb2PXFGuSfWYxpjWoPk/sS4NDBz1xpODseqylOtZlhSL+093 ubuntu-ws-key"
+
+- name: configure openssh based on template
+  ansible.builtin.template:
+    src: "{{ ssh_template_file }}"
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_sshd
